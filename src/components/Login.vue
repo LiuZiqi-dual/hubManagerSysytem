@@ -1,7 +1,7 @@
 <template>
   <div class='login'>
     <!-- LOGO -->
-    <img src="../assets/pornhub.png" alt="LOGO" class="logo">
+    <!-- <img src="../assets/pornhub.png" alt="LOGO" class="logo"> -->
     <div class="container">
       <!-- 头像 -->
       <img src="../assets/anonym.png" alt="" class="avatar">
@@ -54,7 +54,7 @@ export default {
   },
   computed: {
     checkForm () {
-      if (Object.keys(this.ruleForm.username).length === 0) {
+      if (Object.keys(this.ruleForm.username).length === 0 || Object.keys(this.ruleForm.password).length === 0) {
         return true
       } else {
         return false
@@ -84,7 +84,9 @@ export default {
   position: fixed;
   width: 100%;
   height: 100%;
-  background-color: #000;
+  background-image: url('../assets/Coworking_Table.jpg');
+  background-size: cover;
+  // background-color: #000;
   .logo {
     position: absolute;
     top: 0px;
@@ -100,7 +102,7 @@ export default {
     right: 0;
     width: 400px;
     padding: 0px 40px 15px 40px;
-    margin: 300px auto;
+    margin: 200px auto;
     border-radius: 8px;
     // margin-top: 0;
     background: white;
