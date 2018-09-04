@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # admin-itcast
 
 > A Vue.js project
@@ -19,3 +20,7 @@ npm run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+=======
+# hubManagerSysytem
+set up a manager system by VUE 
+>>>>>>> f4376e5a4568ede84b5d3305b3a3ed0ad8ab8a47
