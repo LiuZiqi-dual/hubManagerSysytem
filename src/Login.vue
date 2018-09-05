@@ -28,6 +28,7 @@
 <script>
 import { login } from '@/api/index.js'
 import verify from '@/components/Verify.vue'
+import { message } from '@/components/Message.js'
 export default {
   components: {
     verify
@@ -87,10 +88,14 @@ export default {
           // console.log(valid)
           // console.log(this.ruleForm)
           login(this.ruleForm).then(res => {
+            var self = this
             if (res.data.meta.status === 200) {
               this.$router.push({ name: 'home' })
+              console.log(this)
+              message({obj: self, msg: '恭喜您，登录成功', type: 'success'})
             } else {
               console.log('err')
+              message({obj: self, msg: '登录失败！请检查账号密码', type: 'error'})
             }
           })
         } else {
