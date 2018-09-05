@@ -11,6 +11,7 @@ import './styles/element-variables.scss'
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 /* eslint-disable no-new */
+
 new Vue({
   el: '#app',
   router,

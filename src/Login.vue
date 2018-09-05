@@ -4,7 +4,8 @@
     <!-- <img src="../assets/pornhub.png" alt="LOGO" class="logo"> -->
     <div class="container">
       <!-- 头像 -->
-      <img src="../assets/anonym.png" alt="" class="avatar">
+      <div class="avatar">
+      </div>
       <!-- 表单 -->
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
         <el-form-item prop="username">
@@ -12,6 +13,9 @@
         </el-form-item>
         <el-form-item prop="password">
           <el-input v-model="ruleForm.password" type='password' prefix-icon="myicon myicon-key"></el-input>
+        </el-form-item>
+        <el-form-item class="verify">
+          <verify @isVerified="getVerified"></verify>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')" class="login-btn" :disabled="checkForm">立即登录</el-button>
@@ -23,7 +27,11 @@
 
 <script>
 import { login } from '@/api/index.js'
+import verify from '@/components/Verify.vue'
 export default {
+  components: {
+    verify
+  },
   data () {
     return {
       ruleForm: {
@@ -49,12 +57,20 @@ export default {
             trigger: 'blur'
           }
         ]
-      }
+      },
+      isVerified: false
     }
   },
   computed: {
     checkForm () {
-      if (Object.keys(this.ruleForm.username).length === 0 || Object.keys(this.ruleForm.password).length === 0) {
+      console.log(this.isVerified)
+
+      if (
+        this.isVerified === false ||
+        Object.keys(this.ruleForm.username).length <= 3 ||
+        Object.keys(this.ruleForm.password).length <= 3
+      ) {
+        console.log(123)
         return true
       } else {
         return false
@@ -62,11 +78,21 @@ export default {
     }
   },
   methods: {
+    getVerified (data) {
+      this.isVerified = data
+    },
     submitForm (ruleForm) {
-      this.$refs[ruleForm].validate((valid) => {
+      this.$refs[ruleForm].validate(valid => {
         if (valid) {
-          console.log(this.ruleForm)
-          login(this.ruleForm)
+          // console.log(valid)
+          // console.log(this.ruleForm)
+          login(this.ruleForm).then(res => {
+            if (res.data.meta.status === 200) {
+              this.$router.push({ name: 'home' })
+            } else {
+              console.log('err')
+            }
+          })
         } else {
           console.log('error')
         }
@@ -79,12 +105,16 @@ export default {
 
 <style lang='scss' scoped>
 // 语言为scss
-
+.verify {
+  height: 60px;
+  margin-bottom: 0;
+}
 .login {
   position: fixed;
   width: 100%;
   height: 100%;
-  background-image: url('../assets/Coworking_Table.jpg');
+  background: rgba($color: transparent, $alpha: 0.3)
+    url("./assets/Coworking_Table.jpg");
   background-size: cover;
   // background-color: #000;
   .logo {
@@ -118,6 +148,8 @@ export default {
       border: 10px solid #fff;
       box-shadow: 0 1px 5px #ccc;
       overflow: hidden;
+      background-image: url("./assets/anonym.png");
+      background-size: cover;
     }
     .login-btn {
       font-size: 18px;

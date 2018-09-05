@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 // import HelloWorld from '@/components/HelloWorld'
-import Login from '@/components/Login'
-import Home from '@/components/Home'
+import Login from '@/Login'
+import Home from '@/Home'
+
 Vue.use(Router)
 
 export default new Router({

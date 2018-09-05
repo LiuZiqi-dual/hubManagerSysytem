@@ -67,7 +67,7 @@ export default {
 
 <style lang="scss" scoped>
 .home {
-  background-image: url('../assets/user.png');
+  background-image: url('./assets/user.png');
   background-size: cover;
   height: 100%;
   .el-menu-admin:not(.el-menu--collapse) {
