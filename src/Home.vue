@@ -6,30 +6,45 @@
           <h2>ManagerSystem</h2>
         </div>
         <!-- <img src="../assets/logo.jpg" alt="" class="logo"> -->
-        <el-menu active-text-color="#000" default-active="1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" text-color="#444">
+        <el-menu active-text-color="#000" default-active="1-1" unique-opened=true class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" text-color="#444">
           <el-submenu index="1">
             <template slot="title">
-              <i class="el-icon-menu"></i>
-              <span>导航一</span>
+              <i class="el-icon-search"></i>
+              <span>用户管理</span>
             </template>
-              <el-menu-item index="1-1">选项1</el-menu-item>
-              <el-menu-item index="1-2">选项2</el-menu-item>
+              <el-menu-item index="1-1">用户列表</el-menu-item>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">
-              <i class="el-icon-menu"></i>
-              <span>导航一</span>
+              <i class="el-icon-edit"></i>
+              <span>权限管理</span>
             </template>
               <el-menu-item index="2-1">选项1</el-menu-item>
               <el-menu-item index="2-2">选项2</el-menu-item>
           </el-submenu>
           <el-submenu index="3">
             <template slot="title">
-              <i class="el-icon-menu"></i>
-              <span>导航一</span>
+              <i class="el-icon-goods"></i>
+              <span>商品管理</span>
             </template>
               <el-menu-item index="3-1">选项1</el-menu-item>
               <el-menu-item index="3-2">选项2</el-menu-item>
+          </el-submenu>
+          <el-submenu index="4">
+            <template slot="title">
+              <i class="el-icon-document"></i>
+              <span>订单管理</span>
+            </template>
+              <el-menu-item index="4-1">选项1</el-menu-item>
+              <el-menu-item index="4-2">选项2</el-menu-item>
+          </el-submenu>
+          <el-submenu index="5">
+            <template slot="title">
+              <i class="el-icon-goods"></i>
+              <span>数据统计</span>
+            </template>
+              <el-menu-item index="5-1">选项1</el-menu-item>
+              <el-menu-item index="5-2">选项2</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-aside>
@@ -42,10 +57,11 @@
           <div class="welcome"></div>
         </el-header>
         <el-main>
-          <p>
+          <!-- <p>
             欢迎来到后台管理系统<br>
             每一天都是新的开始...
-          </p>
+          </p> -->
+          <usertable></usertable>
         </el-main>
       </el-container>
     </el-container>
@@ -53,7 +69,11 @@
 </template>
 
 <script>
+import usertable from './components/Usertable.vue'
 export default {
+  components: {
+    usertable
+  },
   methods: {
     handleOpen (key, keyPath) {
       console.log(key, keyPath)

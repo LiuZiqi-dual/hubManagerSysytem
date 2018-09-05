@@ -118,8 +118,8 @@ export default {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: rgba($color: transparent, $alpha: 0.3)
-    url("./assets/Coworking_Table.jpg");
+  background: url("./assets/Coworking_Table.jpg");
+  // opacity: .8;
   background-size: cover;
   // background-color: #000;
   .logo {
@@ -141,6 +141,7 @@ export default {
     border-radius: 8px;
     // margin-top: 0;
     background: white;
+    // z-index: 999;
     .avatar {
       position: relative;
       left: 50%;
