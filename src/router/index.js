@@ -3,7 +3,7 @@ import Router from 'vue-router'
 // import HelloWorld from '@/components/HelloWorld'
 import Login from '@/Login'
 import Home from '@/Home'
-
+import usertable from '../components/Usertable.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -21,7 +21,12 @@ export default new Router({
     {
       path: '/home',
       name: 'home',
-      component: Home
+      component: Home,
+      children: [{
+        path: '/usertable',
+        name: 'usertable',
+        component: usertable
+      }]
     }
   ]
 })

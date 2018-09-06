@@ -90,6 +90,10 @@ export default {
           login(this.ruleForm).then(res => {
             var self = this
             if (res.data.meta.status === 200) {
+              // 在登录成功后获取token
+              console.log(res.data.data.token)
+              localStorage.setItem('mytoken', res.data.data.token)
+              // 路由跳转
               this.$router.push({ name: 'home' })
               console.log(this)
               message({obj: self, msg: '恭喜您，登录成功', type: 'success'})

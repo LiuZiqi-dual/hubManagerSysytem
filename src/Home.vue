@@ -6,13 +6,15 @@
           <h2>ManagerSystem</h2>
         </div>
         <!-- <img src="../assets/logo.jpg" alt="" class="logo"> -->
-        <el-menu active-text-color="#000" default-active="1-1" unique-opened=true class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" text-color="#444">
+        <el-menu active-text-color="#000" default-active="1-1" :unique-opened="true" :router="true" Login.vue class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" text-color="#444">
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-search"></i>
               <span>用户管理</span>
             </template>
-              <el-menu-item index="1-1">用户列表</el-menu-item>
+              <el-menu-item index="/usertable">
+                用户列表
+              </el-menu-item>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">
@@ -61,7 +63,7 @@
             欢迎来到后台管理系统<br>
             每一天都是新的开始...
           </p> -->
-          <usertable></usertable>
+          <router-view></router-view>
         </el-main>
       </el-container>
     </el-container>
@@ -69,11 +71,11 @@
 </template>
 
 <script>
-import usertable from './components/Usertable.vue'
+// import usertable from './components/Usertable.vue'
 export default {
-  components: {
-    usertable
-  },
+  // components: {
+  //   usertable
+  // },
   methods: {
     handleOpen (key, keyPath) {
       console.log(key, keyPath)
