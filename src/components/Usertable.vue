@@ -2,27 +2,34 @@
   <el-table
     :data="tableData"
     stripe
-    style="width: 100%">
+    style="width: 100%"
+    align="center"
+    header-align="center">
     <el-table-column
-      prop="date"
-      label="日期"
+      prop="id"
+      label="id"
       width="180">
     </el-table-column>
     <el-table-column
-      prop="name"
-      label="姓名"
+      prop="username"
+      label="用户名"
       width="180">
     </el-table-column>
     <el-table-column
-      prop="address"
-      label="地址"
-      width="350">
+      prop="mobile"
+      label="电话"
+      width="180">
     </el-table-column>
-    <el-table-column label="权限开关" prop="value5" width="100">
+    <el-table-column
+      prop="role_name"
+      label="职位"
+      width="180">
+    </el-table-column>
+    <el-table-column label="权限开关" prop="mg_state" width="100">
       <template slot-scope="scope">
-      <el-tooltip :content="'管理权限: ' + value2" placement="top">
+      <el-tooltip :content="'管理权限: ' + scope.row.mg_state" placement="top">
         <el-switch
-          v-model="value2"
+          v-model="scope.row.mg_state"
           active-color="#13ce66"
           inactive-color="#ff4949">
         </el-switch>
@@ -50,13 +57,17 @@ export default {
   data () {
     return {
       tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄',
-        value5: '100'
+        id: '',
+        username: '',
+        role_name: '',
+        mg_state: ''
       }],
-      value1: true,
-      value2: true
+      pageData: {
+        query: '',
+        pagenum: '1',
+        pagesize: '40'
+      },
+      value1: true
     }
   },
   methods: {
@@ -68,14 +79,36 @@ export default {
     }
   },
   mounted () {
-    getUserdata()
+    var self = this
+    getUserdata(this.pageData)
+      .then(
+        function (res) {
+          console.log(res.data.data.users)
+          self.tableData = res.data.data.users
+          // console.log(self.brand[0].isDelete);
+          // self.brand = JSON.parse(res.data).brand
+          // console.log(self.brand)
+          // console.log(self.brand[0].isDelete);
+        }
+      )
+      .catch(
+        function (err) {
+          console.log(err)
+        }
+      )
   }
 }
 </script>
 
-<style>
+<style lang="scss">
   .el-table{
     border-radius: 8px;
     top: -120px;
+    th{
+      text-align: center;
+    }
+    td{
+      text-align: center;
+    }
   }
 </style>

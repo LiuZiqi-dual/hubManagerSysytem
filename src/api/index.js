@@ -33,8 +33,8 @@ export const login = (params) => {
 }
 
 // 获取usertable数据
-export const getUserdata = () => {
-  return axios.get('users')
+export const getUserdata = (params) => {
+  return axios.get('users', {params: params})
     .then(
       (res) => {
         console.log(res)
