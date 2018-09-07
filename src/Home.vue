@@ -1,12 +1,13 @@
 <template>
   <div class="home">
     <el-container>
-      <el-aside width="200px">
+      <el-aside width="auto">
         <div class="logo">
-          <h2>ManagerSystem</h2>
+          <h2>OA</h2>
         </div>
         <!-- <img src="../assets/logo.jpg" alt="" class="logo"> -->
-        <el-menu active-text-color="#000" default-active="1-1" :unique-opened="true" :router="true" Login.vue class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" text-color="#444">
+        <!--  :collapse="true" -->
+        <el-menu active-text-color="#000" default-active="1-1" :unique-opened="true" :router="true" Login.vue class="el-menu-admin" @open="handleOpen" @close="handleClose" :collapse="isCollapse" text-color="#444">
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-search"></i>
@@ -52,7 +53,7 @@
       </el-aside>
       <el-container>
         <el-header>
-          <div class="toggle-btn">
+          <div class="toggle-btn" @click='isCollapse=!isCollapse'>
             <i class="el-icon-d-arrow-left"></i>
           </div>
           <h2>后台管理系统</h2>
@@ -76,6 +77,11 @@ export default {
   // components: {
   //   usertable
   // },
+  data () {
+    return {
+      isCollapse: false
+    }
+  },
   methods: {
     handleOpen (key, keyPath) {
       console.log(key, keyPath)
@@ -106,7 +112,7 @@ export default {
     // flex-wrap: wrap;
     // justify-content: center;
     .el-menu {
-      margin-top: 30%;
+      margin-top: 0;
       background-color: #3ECCB5;
       font-weight: 900;
       // text-color: #fff;
@@ -132,7 +138,7 @@ export default {
   .el-main {
     display: flex;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
     p{
       display: flex;
       justify-content: center;
