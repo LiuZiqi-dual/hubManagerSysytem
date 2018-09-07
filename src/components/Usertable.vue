@@ -1,13 +1,15 @@
 <template>
   <div class="usertable">
+    <!-- 面包屑和搜索框 -->
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item :to="{ path: '/home' }">用户管理</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ path: '/getUserdata' }">用户列表</el-breadcrumb-item>
+      <el-breadcrumb-item>用户列表</el-breadcrumb-item>
       <el-autocomplete v-model="state4" :fetch-suggestions="querySearchAsync" placeholder="请输入搜索内容" @select="handleSelect">
         <el-button slot="append" icon="el-icon-search"></el-button>
       </el-autocomplete>
     </el-breadcrumb>
+    <!-- 面包屑和搜索框 -->
     <el-table :data="tableData" stripe style="width: 100%" align="center" header-align="center">
       <el-table-column prop="id" label="id" width="180">
       </el-table-column>
@@ -17,9 +19,9 @@
       </el-table-column>
       <el-table-column prop="role_name" label="职位" width="180">
       </el-table-column>
-      <el-table-column label="权限开关" prop="mg_state" width="100">
+      <el-table-column label="激活开关" prop="mg_state" width="100">
         <template slot-scope="scope">
-          <el-tooltip :content="'管理权限: ' + scope.row.mg_state" placement="top">
+          <el-tooltip :content="'账户状态: ' + scope.row.mg_state" placement="top">
             <el-switch v-model="scope.row.mg_state" active-color="#13ce66" inactive-color="#ff4949">
             </el-switch>
           </el-tooltip>
@@ -32,6 +34,19 @@
         </template>
       </el-table-column>
     </el-table>
+    <!-- 分页栏 -->
+    <div class="block">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage1"
+        :page-sizes="[1, 2, 3, 4,pageTotal-0]"
+        :page-size="pageData.pagesize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="pageTotal-0">
+      </el-pagination>
+    </div>
+    <!-- 分页栏 -->
   </div>
 </template>
 
@@ -50,17 +65,37 @@ export default {
       ],
       pageData: {
         query: '',
-        pagenum: '1',
-        pagesize: '40'
+        pagenum: 1,
+        pagesize: 1
       },
       value1: true,
       // 搜索框的数据
       restaurants: [],
       state4: '',
-      timeout: null
+      timeout: null,
+
+      // 分页数据
+      pageTotal: '',
+      pageNuml: '',
+      currentPage1: 1
     }
   },
   methods: {
+    // 重载数据函数
+    reloadData (pageData) {
+      var self = this
+      getUserdata(pageData)
+        .then(function (res) {
+          console.log(res.data.data)
+          self.tableData = res.data.data.users
+          self.pageTotal = res.data.data.total
+          self.pageNum = res.data.data.pagenum
+        })
+        .catch(function (err) {
+          console.log(err)
+        })
+    },
+    // 重载数据函数
     handleEdit (index, row) {
       console.log(index, row)
     },
@@ -125,7 +160,7 @@ export default {
         { value: '壹杯加', address: '上海市长宁区通协路' },
         {
           value: '唦哇嘀咖',
-          address: '上海市长宁区新泾镇金钟路999号2幢（B幢）第01层第1-02A单元'
+          address: '上海市长宁区新泾镇金钟路999号2幢（B幢）第01层第12A单元'
         },
         { value: '爱茜茜里(西郊百联)', address: '长宁区仙霞西路88号1305室' },
         {
@@ -208,22 +243,24 @@ export default {
     },
     handleSelect (item) {
       console.log(item)
+    },
+    // 分页栏的事件
+    handleSizeChange (val) {
+      console.log(`每页 ${val} 条`)
+      this.pageData.pagesize = (` ${val} `) - 0
+      console.log(this.pageData.pagesize)
+      this.reloadData(this.pageData)
+    },
+    handleCurrentChange (val) {
+      console.log(`当前页: ${val}`)
+      console.log(` ${val} `)
+      this.pageData.pagenum = ` ${val} `
+      this.reloadData(this.pageData)
+      // console.log(this.tableData)
     }
   },
   mounted () {
-    var self = this
-    getUserdata(this.pageData)
-      .then(function (res) {
-        console.log(res.data.data.users)
-        self.tableData = res.data.data.users
-        // console.log(self.brand[0].isDelete);
-        // self.brand = JSON.parse(res.data).brand
-        // console.log(self.brand)
-        // console.log(self.brand[0].isDelete);
-      })
-      .catch(function (err) {
-        console.log(err)
-      })
+    this.reloadData(this.pageData)
   }
 }
 </script>
@@ -249,7 +286,7 @@ export default {
     }
   }
   .el-table {
-    border-radius: 8px;
+    // border-radius: 8px;
     position: static !important;
     th {
       text-align: center;
@@ -258,5 +295,25 @@ export default {
       text-align: center;
     }
   }
+  .block{
+    height: 50px;
+    margin-top: -10px;
+    padding-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 8px 8px;
+    background-color: #f5f5f5;
+    .el-pagination{
+      width:100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // line-height: 50px;
+
+    }
+  }
+
 }
 </style>
