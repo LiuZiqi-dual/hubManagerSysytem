@@ -53,8 +53,8 @@
       </el-aside>
       <el-container>
         <el-header>
-          <div class="toggle-btn" @click='isCollapse=!isCollapse'>
-            <i class="el-icon-d-arrow-left"></i>
+          <div class="toggle-btn" @click='toggleCollapse'>
+            <i class="el-icon-d-arrow-left" :style="{transform:[isCollapse? 'rotateZ(180deg)' :'rotateZ(0deg)']}"></i>
           </div>
           <h2>后台管理系统</h2>
           <div class="welcome"></div>
@@ -79,7 +79,9 @@ export default {
   // },
   data () {
     return {
-      isCollapse: false
+      isCollapse: false,
+      red: 'red',
+      blue: 'blue'
     }
   },
   methods: {
@@ -88,6 +90,9 @@ export default {
     },
     handleClose (key, keyPath) {
       console.log(key, keyPath)
+    },
+    toggleCollapse () {
+      this.isCollapse = !this.isCollapse
     }
   }
 }
@@ -119,6 +124,7 @@ export default {
       i{
         color: #444;
         font-weight: 900;
+        border-radius: 50%;
       }
       .el-menu-item{
         background-color: #3ECCB5;
@@ -180,6 +186,9 @@ export default {
     &:hover {
       background-color: #3ECCB5;
       color: #000 !important
+    }
+    i{
+      transition: all 1s ease-out;
     }
   }
   h2 {
