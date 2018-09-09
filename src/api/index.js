@@ -47,3 +47,16 @@ export const getUserdata = (params) => {
       }
     )
 }
+
+// 添加用户信息
+export const addUserdata = (params) => {
+  return axios.post('users', params)
+    .then((res) => {
+      console.log(params)
+      console.log(res)
+      return res
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}

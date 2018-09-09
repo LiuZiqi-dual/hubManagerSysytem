@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Login from '@/Login'
 import Home from '@/Home'
 import usertable from '../components/Usertable.vue'
+import adduser from '../components/Adduser.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -26,6 +27,11 @@ export default new Router({
         path: '/usertable',
         name: 'usertable',
         component: usertable
+      },
+      {
+        path: '/adduser',
+        name: 'adduser',
+        component: adduser
       }]
     }
   ]

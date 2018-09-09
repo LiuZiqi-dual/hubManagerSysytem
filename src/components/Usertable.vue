@@ -41,7 +41,7 @@
         @current-change="handleCurrentChange"
         :current-page="currentPage1"
         :page-sizes="[1, 2, 3, 4,pageTotal-0]"
-        :page-size11111111111111111111111="pageData.pagesize"
+        :page-size="pageData.pagesize"
         layout="total, sizes, prev, pager, next, jumper"
         :total="pageTotal-0">
       </el-pagination>
@@ -66,7 +66,7 @@ export default {
       pageData: {
         query: '',
         pagenum: 1,
-        pagesize: 1
+        pagesize: 5
       },
       value1: true,
       // 搜索框的数据

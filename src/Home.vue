@@ -16,6 +16,9 @@
               <el-menu-item index="/usertable">
                 用户列表
               </el-menu-item>
+              <el-menu-item index="/adduser">
+                添加用户
+              </el-menu-item>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">
@@ -43,7 +46,7 @@
           </el-submenu>
           <el-submenu index="5">
             <template slot="title">
-              <i class="el-icon-goods"></i>
+              <i class="el-icon-share"></i>
               <span>数据统计</span>
             </template>
               <el-menu-item index="5-1">选项1</el-menu-item>
