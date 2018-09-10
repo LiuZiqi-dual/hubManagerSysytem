@@ -148,18 +148,6 @@ export default {
     display: flex;
     justify-content: center;
     // align-items: center;
-    p{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: rgba($color: transparent, $alpha: 0.7);
-      width: 400px;
-      height: 90px;
-      border-radius: 8px;
-      color: #fff;
-      font-size: 30px;
-      font-weight: 900;
-    }
     // background-color: rgba($color: transparent, $alpha: 0.3)
   }
   .logo {

@@ -60,3 +60,20 @@ export const addUserdata = (params) => {
       console.log(err)
     })
 }
+
+// 修改用户状态
+export const switchUserStatus = (uId, type) => {
+  return axios.put('users/' + uId + '/state/' + type, '')
+    .then((res) => {
+      console.log(res)
+      return res
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+// 删除用户
+export const delUserData = () => {
+
+}

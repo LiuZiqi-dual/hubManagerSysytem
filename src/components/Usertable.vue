@@ -22,7 +22,7 @@
       <el-table-column label="激活开关" prop="mg_state" width="100">
         <template slot-scope="scope">
           <el-tooltip :content="'账户状态: ' + scope.row.mg_state" placement="top">
-            <el-switch v-model="scope.row.mg_state" active-color="#13ce66" inactive-color="#ff4949">
+            <el-switch v-model="scope.row.mg_state" active-color="#13ce66" inactive-color="#ff4949" @change="switchUserStatus(scope.row.id, scope.row.mg_state)">
             </el-switch>
           </el-tooltip>
         </template>
@@ -40,7 +40,7 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="currentPage1"
-        :page-sizes="[1, 2, 3, 4,pageTotal-0]"
+        :page-sizes="[1, 2, 3, pageData.pagesize,pageTotal-0]"
         :page-size="pageData.pagesize"
         layout="total, sizes, prev, pager, next, jumper"
         :total="pageTotal-0">
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { getUserdata } from '@/api/index.js'
+import { getUserdata, switchUserStatus } from '@/api/index.js'
 export default {
   data () {
     return {
@@ -86,16 +86,17 @@ export default {
       var self = this
       getUserdata(pageData)
         .then(function (res) {
-          console.log(res.data.data)
-          self.tableData = res.data.data.users
-          self.pageTotal = res.data.data.total
-          self.pageNum = res.data.data.pagenum
+          var data = res.data.data
+          console.log(data)
+          self.tableData = data.users
+          self.pageTotal = data.total
+          self.pageNum = data.pagenum
         })
         .catch(function (err) {
           console.log(err)
         })
     },
-    // 重载数据函数
+    // 编辑与删除函数
     handleEdit (index, row) {
       console.log(index, row)
     },
@@ -244,6 +245,14 @@ export default {
     handleSelect (item) {
       console.log(item)
     },
+
+    // 修改用户状态
+    switchUserStatus (uId, type) {
+      console.log(uId)
+      console.log(type)
+      switchUserStatus(uId, type)
+    },
+
     // 分页栏的事件
     handleSizeChange (val) {
       console.log(`每页 ${val} 条`)
