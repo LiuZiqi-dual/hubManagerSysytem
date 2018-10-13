@@ -29,7 +29,7 @@
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+          <el-button size="mini" @click="dialogFormVisible = true">编辑</el-button>
           <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
         </template>
       </el-table-column>
@@ -40,13 +40,33 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="currentPage1"
-        :page-sizes="[1, 2, 3, pageData.pagesize,pageTotal-0]"
-        :page-size="pageData.pagesize"
+        :page-sizes="[1, 5, 10, 30, 50]"
+        :page-size="5"
         layout="total, sizes, prev, pager, next, jumper"
         :total="pageTotal-0">
       </el-pagination>
     </div>
     <!-- 分页栏 -->
+
+    <!-- 编辑用户 -->
+    <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+      <el-form :model="form">
+        <el-form-item label="活动名称" :label-width="formLabelWidth">
+          <el-input v-model="form.name" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="活动区域" :label-width="formLabelWidth">
+          <el-select v-model="form.region" placeholder="请选择活动区域">
+            <el-option label="区域一" value="shanghai"></el-option>
+            <el-option label="区域二" value="beijing"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogFormVisible = false">确定</el-button>
+      </div>
+    </el-dialog>
+    <!-- 编辑用户 -->
   </div>
 </template>
 
@@ -77,7 +97,21 @@ export default {
       // 分页数据
       pageTotal: '',
       pageNuml: '',
-      currentPage1: 1
+      currentPage1: 1,
+
+      // 编辑用户提交
+      dialogFormVisible: false,
+      form: {
+        name: '',
+        region: '',
+        date1: '',
+        date2: '',
+        delivery: false,
+        type: [],
+        resource: '',
+        desc: ''
+      },
+      formLabelWidth: '120px'
     }
   },
   methods: {

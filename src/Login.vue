@@ -65,7 +65,6 @@ export default {
   computed: {
     checkForm () {
       console.log(this.isVerified)
-
       if (
         this.isVerified === false ||
         Object.keys(this.ruleForm.username).length <= 3 ||

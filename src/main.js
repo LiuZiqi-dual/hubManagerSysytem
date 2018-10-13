@@ -12,6 +12,24 @@ Vue.config.productionTip = false
 Vue.use(ElementUI)
 /* eslint-disable no-new */
 
+//  添加全局路由守卫（导航守卫）
+router.beforeEach((to, from, next) => {
+  // to and from are both route objects
+  var token = localStorage.getItem('mytoken')
+  if (token) {
+    console.log(456)
+    next()
+  } else {
+    console.log(789)
+    console.log(to)
+    if (to.path === '/login') {
+      next()
+    } else {
+      next({path: '/login'})
+    }
+  }
+})
+
 new Vue({
   el: '#app',
   router,

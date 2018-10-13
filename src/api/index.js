@@ -1,6 +1,6 @@
 import axios from 'axios'
 // 设置baseURL
-const baseUrl = 'http://localhost:8888/api/private/v1/'
+const baseUrl = 'http://47.106.167.139:8888/api/private/v1/'
 axios.defaults.baseURL = baseUrl
 
 // 添加一个拦截器
@@ -64,6 +64,18 @@ export const addUserdata = (params) => {
 // 修改用户状态
 export const switchUserStatus = (uId, type) => {
   return axios.put('users/' + uId + '/state/' + type, '')
+    .then((res) => {
+      console.log(res)
+      return res
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+// 编辑用户提交
+export const handleEdit = (id, params) => {
+  return axios.put('users/' + id, params)
     .then((res) => {
       console.log(res)
       return res

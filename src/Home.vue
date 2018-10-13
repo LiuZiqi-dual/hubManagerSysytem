@@ -60,7 +60,9 @@
             <i class="el-icon-d-arrow-left" :style="{transform:[isCollapse? 'rotateZ(180deg)' :'rotateZ(0deg)']}"></i>
           </div>
           <h2>后台管理系统</h2>
-          <div class="welcome"></div>
+          <div class="hellow">
+            你好：
+          </div>
         </el-header>
         <el-main>
           <!-- <p>
@@ -186,7 +188,7 @@ export default {
     font-size: 28px;
     color: white;
   }
-  .welcome {
+  .hellow {
     color: white;
   }
 }
